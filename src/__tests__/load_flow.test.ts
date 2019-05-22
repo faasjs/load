@@ -15,10 +15,8 @@ describe('loadFlow', function () {
     loadFlow(flow, process.cwd() + '/src/__tests__/', process.cwd() + '/src/__tests__/fake.flow.ts', 'defaults');
 
     expect(flow.config.resource).toEqual({
-      resource: {
-        name: 'function',
-        type: 'function'
-      }
+      name: 'function',
+      type: 'function'
     });
     expect(flow.config.triggers).toEqual({
       http: {
