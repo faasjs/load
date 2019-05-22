@@ -1,3 +1,9 @@
 resources:
+  function:
+    type: 'function'
   test:
     type: 'defaults'
+  http:
+    type: 'http'
+  mysql:
+    type: 'mysql'

@@ -665,6 +665,19 @@
     eslint-plugin-security "*"
     typescript "*"
 
+"@faasjs/flow@beta":
+  version "0.0.0-alpha.21"
+  resolved "https://registry.npm.taobao.org/@faasjs/flow/download/@faasjs/flow-0.0.0-alpha.21.tgz#10542859bc34de3307a96e3521d9dddaa4894689"
+  integrity sha1-EFQoWbw03jMHqW41Idnd2qSJRok=
+  dependencies:
+    "@faasjs/deep_merge" beta
+    "@faasjs/logger" beta
+
+"@faasjs/logger@beta":
+  version "0.0.0-alpha.2"
+  resolved "https://registry.npm.taobao.org/@faasjs/logger/download/@faasjs/logger-0.0.0-alpha.2.tgz#f318ce9acf5f988bfc7f4fd5e5687dad537cbf44"
+  integrity sha1-8xjOms9fmIv8f0/V5Wh9rVN8v0Q=
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.npm.taobao.org/@jest/console/download/@jest/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"
