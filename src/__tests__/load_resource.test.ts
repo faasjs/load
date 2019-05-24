@@ -25,19 +25,15 @@ describe('loadResource', function () {
     });
 
     expect(target.test).toEqual({
-      resource: {
-        type: 'test',
-        name: 'test'
-      }
+      type: 'test',
+      name: 'test'
     })
   });
 
   test('resource name', function () {
     const target = {
       test: {
-        resource: {
-          name: 'a'
-        }
+        name: 'a'
       }
     };
     loadResource(target, {
@@ -50,10 +46,8 @@ describe('loadResource', function () {
     });
 
     expect(target.test).toEqual({
-      resource: {
-        type: 'a',
-        name: 'a'
-      }
+      type: 'a',
+      name: 'a'
     })
   });
 
@@ -74,19 +68,15 @@ describe('loadResource', function () {
     });
 
     expect(target.test).toEqual({
-      resource: {
-        type: 'a',
-        name: 'a'
-      }
+      type: 'a',
+      name: 'a'
     })
   });
 
   test('provider', function () {
     const target = {
       test: {
-        resource: {
-          provider: 'a'
-        }
+        provider: 'a'
       }
     };
     loadResource(target, {
@@ -103,12 +93,10 @@ describe('loadResource', function () {
     });
 
     expect(target.test).toEqual({
-      resource: {
-        type: 'test',
-        name: 'test',
-        provider: {
-          type: 'a'
-        }
+      type: 'test',
+      name: 'test',
+      provider: {
+        type: 'a'
       }
     });
   });
@@ -128,9 +116,7 @@ describe('loadResource', function () {
   test('not found provider', function () {
     const target = {
       test: {
-        resource: {
-          provider: 'a'
-        }
+        provider: 'a'
       }
     };
     expect(() => {

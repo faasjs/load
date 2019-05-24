@@ -18,18 +18,14 @@ describe('loadFlow', function () {
     expect(flow.resource.type).toEqual('function');
     expect(flow.triggers).toEqual({
       http: {
-        resource: {
-          name: 'http',
-          type: 'http'
-        }
+        name: 'http',
+        type: 'http'
       }
     });
     expect(flow.resources).toEqual({
       mysql: {
-        resource: {
-          name: 'mysql',
-          type: 'mysql'
-        }
+        name: 'mysql',
+        type: 'mysql'
       }
     });
   });
