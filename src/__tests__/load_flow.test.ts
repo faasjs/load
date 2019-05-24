@@ -14,11 +14,9 @@ describe('loadFlow', function () {
 
     loadFlow(flow, process.cwd() + '/src/__tests__/', process.cwd() + '/src/__tests__/fake.flow.ts', 'defaults');
 
-    expect(flow.config.resource).toEqual({
-      name: 'function',
-      type: 'function'
-    });
-    expect(flow.config.triggers).toEqual({
+    expect(flow.resource.name).toEqual('function');
+    expect(flow.resource.type).toEqual('function');
+    expect(flow.triggers).toEqual({
       http: {
         resource: {
           name: 'http',
@@ -26,7 +24,7 @@ describe('loadFlow', function () {
         }
       }
     });
-    expect(flow.config.resources).toEqual({
+    expect(flow.resources).toEqual({
       mysql: {
         resource: {
           name: 'mysql',

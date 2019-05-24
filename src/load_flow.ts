@@ -12,9 +12,9 @@ import loadResource from './load_resource';
 export default function loadFlow (flow: any, root: string, file: string, staging: string) {
   const providers = loadConfig(root, file, staging);
 
-  loadResource({ function: flow.config }, providers);
-  loadResource(flow.config.triggers || {}, providers);
-  loadResource(flow.config.resources || {}, providers);
+  loadResource({ function: flow }, providers);
+  loadResource(flow.triggers || {}, providers);
+  loadResource(flow.resources || {}, providers);
 
   return flow;
 }
