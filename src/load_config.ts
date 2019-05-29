@@ -8,7 +8,7 @@ import { safeLoad } from 'js-yaml';
 export class Config {
   public readonly root: string;
   public readonly filename: string;
-  public readonly all: {
+  public readonly origin: {
     defaults: {
       [key: string]: any;
     };
@@ -48,18 +48,18 @@ export class Config {
       return root;
     });
 
-    this.all = deepMerge.apply(null, configs);
+    this.origin = deepMerge.apply(null, configs);
 
-    if (!this.all.defaults) {
+    if (!this.origin.defaults) {
       throw Error('faas.yaml need defaults env.');
     }
 
-    for (const key in this.all) {
-      if (this.all.hasOwnProperty(key)) {
+    for (const key in this.origin) {
+      if (this.origin.hasOwnProperty(key)) {
         if (key === 'defaults') {
-          this[key as string] = this.all.defaults;
+          this[key as string] = this.origin.defaults;
         } else {
-          this[key as string] = deepMerge(this.all.defaults, this.all[key as string]);
+          this[key as string] = deepMerge(this.origin.defaults, this.origin[key as string]);
         }
       }
     }
