@@ -26,6 +26,11 @@ export class Config {
    */
   constructor (root: string, filename: string) {
     this.root = root;
+
+    if (!this.root.endsWith('/')) {
+      this.root += '/';
+    }
+
     this.filename = filename;
 
     const configs: { [key: string]: any }[] = [];
@@ -33,7 +38,6 @@ export class Config {
     const paths = filename.replace(root, '').replace(/\/[^/]+$/, '').split('/');
 
     const roots = root.split('/');
-    roots.pop();
     paths.unshift(roots.pop() as string);
     paths.unshift(roots.join('/'));
 
