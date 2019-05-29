@@ -1,6 +1,6 @@
 {
   "name": "@faasjs/load",
-  "version": "0.0.0-alpha.5",
+  "version": "0.0.0-alpha.6",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -18,7 +18,10 @@
   ],
   "dependencies": {
     "@faasjs/deep_merge": "beta",
-    "js-yaml": "*"
+    "js-yaml": "*",
+    "rollup": "*",
+    "rollup-plugin-typescript2": "*",
+    "typescript": "*"
   },
   "devDependencies": {
     "@babel/core": "*",
@@ -33,10 +36,7 @@
     "babel-jest": "*",
     "jest": "*",
     "jsdoc-babel": "*",
-    "jsdoc-to-markdown": "*",
-    "rollup": "*",
-    "rollup-plugin-typescript2": "*",
-    "typescript": "*"
+    "jsdoc-to-markdown": "*"
   },
   "babel": {
     "presets": [
