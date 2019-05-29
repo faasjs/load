@@ -21,15 +21,16 @@ export default function loadConfig (root: string, file: string, staging: string)
 
   paths.reduce(function (base, path) {
     const root = base + '/' + path;
-    const defaults = root + '/config/providers/defaults.yaml';
+    const faas = root + '/faas.yaml';
 
-    if (existsSync(defaults)) {
-      configs.push(safeLoad(readFileSync(defaults).toString()));
-    }
-
-    const env = root + '/config/providers/' + staging + '.yaml';
-    if (existsSync(env)) {
-      configs.push(safeLoad(readFileSync(env).toString()));
+    if (existsSync(faas)) {
+      const config = safeLoad(readFileSync(faas).toString());
+      if (config.defaults) {
+        configs.push(config.defaults);
+      }
+      if (config[staging as string]) {
+        configs.push(config[staging as string]);
+      }
     }
 
     return root;

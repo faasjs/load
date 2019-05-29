@@ -1,0 +1,4 @@
+local:
+  resources:
+    test:
+      type: 'sublocal'
