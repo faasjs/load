@@ -10,6 +10,9 @@
 <dt><a href="#loadFlow">loadFlow(flow, root, file, staging)</a></dt>
 <dd><p>加载流程对象的云资源配置</p>
 </dd>
+<dt><a href="#loadTs">loadTs(filename, options)</a></dt>
+<dd><p>加载 ts 文件</p>
+</dd>
 </dl>
 
 <a name="loadConfig"></a>
@@ -50,4 +53,19 @@
 | root | <code>string</code> | 起始路径 |
 | file | <code>string</code> | 流程文件路径 |
 | staging | <code>string</code> | 环境 |
+
+<a name="loadTs"></a>
+
+## loadTs(filename, options)
+加载 ts 文件
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| filename | <code>string</code> | 完整源文件路径 |
+| options | <code>object</code> | 配置项 |
+| options.input | <code>object</code> | 读取配置 |
+| options.output | <code>object</code> | 写入配置 |
+| options.tmp | <code>boolean</code> | 是否为临时文件，true 则生成的文件会被删除，默认为 false |
 
