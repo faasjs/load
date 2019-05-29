@@ -38,12 +38,12 @@ export default async function loadTs (filename: string, options: {
 
   const bundle = await rollup.rollup(input);
 
-  const dependencies = new Map();
+  const dependencies = Object.create(null);
 
   for (const m of bundle.cache.modules || []) {
     for (const d of m.dependencies) {
-      if (!dependencies.has(d)) {
-        dependencies.set(d, execSync(`npm view ${d} version`).toString());
+      if (!dependencies[d as string]) {
+        dependencies[d as string] = execSync(`npm view ${d} version`).toString().replace('\n', '');
       }
     }
   }
