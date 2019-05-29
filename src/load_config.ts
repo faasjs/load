@@ -56,7 +56,11 @@ export class Config {
 
     for (const key in this.all) {
       if (this.all.hasOwnProperty(key)) {
-        this[key as string] = this.all[key as string];
+        if (key === 'defaults') {
+          this[key as string] = this.all.defaults;
+        } else {
+          this[key as string] = deepMerge(this.all.defaults, this.all[key as string]);
+        }
       }
     }
   }
