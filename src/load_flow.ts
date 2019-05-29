@@ -10,7 +10,7 @@ import loadResource from './load_resource';
  * @param staging {string} 环境
  */
 export default function loadFlow (flow: any, root: string, file: string, staging: string) {
-  const providers = loadConfig(root, file, staging);
+  const providers = loadConfig(root, file)[staging as string];
 
   flow.resource = loadResource({ function: flow.resource }, providers).function;
   flow.triggers = loadResource(flow.triggers || {}, providers);

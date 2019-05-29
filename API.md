@@ -1,8 +1,16 @@
+## Classes
+
+<dl>
+<dt><a href="#Config">Config</a></dt>
+<dd><p>配置类</p>
+</dd>
+</dl>
+
 ## Functions
 
 <dl>
-<dt><a href="#loadConfig">loadConfig(root, file, staging)</a></dt>
-<dd><p>读取指定环境的配置</p>
+<dt><a href="#loadConfig">loadConfig(root, filename)</a></dt>
+<dd><p>加载配置</p>
 </dd>
 <dt><a href="#loadResource">loadResource(targets, configs)</a></dt>
 <dd><p>加载补全云资源配置</p>
@@ -15,18 +23,34 @@
 </dd>
 </dl>
 
+<a name="Config"></a>
+
+## Config
+配置类
+
+**Kind**: global class  
+<a name="new_Config_new"></a>
+
+### new Config(root, filename)
+创建配置类，并自动读取配置内容
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| root | <code>string</code> | 根目录 |
+| filename | <code>filename</code> | 目标文件，用于读取目录层级 |
+
 <a name="loadConfig"></a>
 
-## loadConfig(root, file, staging)
-读取指定环境的配置
+## loadConfig(root, filename)
+加载配置
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| root | <code>string</code> | 起始路径 |
-| file | <code>string</code> | 目标文件 |
-| staging | <code>string</code> | 环境 |
+| root | <code>string</code> | 根目录 |
+| filename | <code>filename</code> | 目标文件，用于读取目录层级 |
 
 <a name="loadResource"></a>
 
