@@ -12,12 +12,6 @@
 <dt><a href="#loadConfig">loadConfig(root, filename)</a></dt>
 <dd><p>加载配置</p>
 </dd>
-<dt><a href="#loadResource">loadResource(targets, configs)</a></dt>
-<dd><p>加载补全云资源配置</p>
-</dd>
-<dt><a href="#loadFlow">loadFlow(flow, root, file, staging)</a></dt>
-<dd><p>加载流程对象的云资源配置</p>
-</dd>
 <dt><a href="#loadTs">loadTs(filename, options)</a></dt>
 <dd><p>加载 ts 文件</p>
 </dd>
@@ -51,32 +45,6 @@
 | --- | --- | --- |
 | root | <code>string</code> | 根目录 |
 | filename | <code>filename</code> | 目标文件，用于读取目录层级 |
-
-<a name="loadResource"></a>
-
-## loadResource(targets, configs)
-加载补全云资源配置
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| targets | <code>object</code> | 解析对象 |
-| configs | <code>object</code> | 云资源总配置 |
-
-<a name="loadFlow"></a>
-
-## loadFlow(flow, root, file, staging)
-加载流程对象的云资源配置
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| flow | <code>Flow</code> | 流程对象 |
-| root | <code>string</code> | 起始路径 |
-| file | <code>string</code> | 流程文件路径 |
-| staging | <code>string</code> | 环境 |
 
 <a name="loadTs"></a>
 
