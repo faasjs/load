@@ -5,6 +5,7 @@ describe('loadConfig', function () {
     const config = loadConfig(process.cwd() + '/src/__tests__/', process.cwd() + '/src/__tests__/fake.func.ts').defaults;
 
     expect(config.resources.test.type).toEqual('defaults');
+    expect(config.resources.function.provider).toEqual(config.providers.tc);
   });
 
   test('local', function () {

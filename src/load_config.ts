@@ -61,9 +61,35 @@ export class Config {
     for (const key in this.origin) {
       if (this.origin.hasOwnProperty(key)) {
         if (key === 'defaults') {
-          this[key as string] = this.origin.defaults;
+          this[key as string] = deepMerge(this.origin.defaults);
         } else {
           this[key as string] = deepMerge(this.origin.defaults, this.origin[key as string]);
+        }
+
+        const data = this[key as string];
+
+        if (!data.providers) {
+          throw Error(`faas.yaml missing key: ${key}/providers`);
+        }
+
+        if (!data.resources) {
+          throw Error(`faas.yaml missing key: ${key}/resources`);
+        }
+
+        for (const resourceKey in data.resources) {
+          if (data.resources.hasOwnProperty(resourceKey)) {
+            const resource = data.resources[resourceKey as string];
+            if (resource.provider) {
+              if (typeof resource.provider === 'string') {
+                if (!data.providers[resource.provider]) {
+                  throw Error(`faas.yaml missing provider: ${resource.provider} from ${key}/resources/${resourceKey}`);
+                }
+                resource.provider = data.providers[resource.provider];
+              } else {
+                resource.provider = deepMerge(data.providers[resource.provider], resource.provider);
+              }
+            }
+          }
         }
       }
     }
