@@ -42,7 +42,7 @@ export default async function loadTs (filename: string, options: {
 
   for (const m of bundle.cache.modules || []) {
     for (const d of m.dependencies) {
-      if (!dependencies[d as string]) {
+      if (!d.startsWith('/') && !dependencies[d as string]) {
         dependencies[d as string] = execSync(`yarn list ${d}`).toString().match(/([0-9a-z.-]+)\n/)![1];
       }
     }
