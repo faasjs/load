@@ -7,8 +7,10 @@ defaults:
         secretId: secretId
         secretKey: secretKey
         region: ap-beijing
-  resources:
-    function:
+  plugins:
+    defaults:
+      function: func
+    func:
       provider: tc
       type: 'function'
     test:
@@ -18,6 +20,6 @@ defaults:
     mysql:
       type: 'mysql'
 local:
-  resources:
+  plugins:
     test:
       type: 'local'

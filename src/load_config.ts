@@ -55,7 +55,7 @@ export class Config {
     this.origin = deepMerge.apply(null, configs);
 
     if (!this.origin.defaults) {
-      throw Error('faas.yaml need defaults env.');
+      throw Error('[faas.yaml] need defaults env.');
     }
 
     for (const key in this.origin) {
@@ -69,26 +69,47 @@ export class Config {
         const data = this[key as string];
 
         if (!data.providers) {
-          throw Error(`faas.yaml missing key: ${key}/providers`);
+          throw Error(`[faas.yaml] missing key: ${key}/providers`);
         }
 
-        if (!data.resources) {
-          throw Error(`faas.yaml missing key: ${key}/resources`);
+        if (!data.plugins) {
+          throw Error(`[faas.yaml] missing key: ${key}/plugins`);
         }
 
-        for (const resourceKey in data.resources) {
-          if (data.resources.hasOwnProperty(resourceKey)) {
-            const resource = data.resources[resourceKey as string];
-            if (resource.provider) {
-              if (typeof resource.provider === 'string') {
-                if (!data.providers[resource.provider]) {
-                  throw Error(`faas.yaml missing provider: ${resource.provider} from ${key}/resources/${resourceKey}`);
+        if (!data.plugins.defaults) {
+          throw Error(`[faas.yaml] missing key: ${key}/plugins/defaults`);
+        }
+
+        for (const pluginKey in data.plugins) {
+          if (pluginKey === 'defaults') {
+            continue;
+          }
+          if (data.plugins.hasOwnProperty(pluginKey)) {
+            const plugin = data.plugins[pluginKey as string];
+            plugin.name = pluginKey;
+            if (plugin.provider) {
+              if (typeof plugin.provider === 'string') {
+                if (!data.providers[plugin.provider]) {
+                  throw Error(`[faas.yaml] missing provider: ${plugin.provider} <${key}/plugins/${pluginKey}>`);
                 }
-                resource.provider = data.providers[resource.provider];
+                plugin.provider = data.providers[plugin.provider];
               } else {
-                resource.provider = deepMerge(data.providers[resource.provider], resource.provider);
+                plugin.provider = deepMerge(data.providers[plugin.provider], plugin.provider);
               }
             }
+          }
+        }
+
+        for (const pluginKey in data.plugins.defaults) {
+          if (data.plugins.defaults.hasOwnProperty(pluginKey)) {
+            const plugin = data.plugins.defaults[pluginKey as string];
+            if (typeof plugin !== 'string') {
+              continue;
+            }
+            if (!data.plugins[plugin as string]) {
+              throw Error(`[faas.yaml] Not found plugin ${plugin} <${key}/plugins/defaults/${pluginKey}>`);
+            }
+            data.plugins.defaults[pluginKey as string] = data.plugins[plugin as string];
           }
         }
       }

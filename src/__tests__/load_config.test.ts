@@ -4,21 +4,31 @@ describe('loadConfig', function () {
   test('defaults', function () {
     const config = loadConfig(process.cwd() + '/src/__tests__/', process.cwd() + '/src/__tests__/fake.func.ts').defaults;
 
-    expect(config.resources.test.type).toEqual('defaults');
-    expect(config.resources.function.provider).toEqual(config.providers.tc);
+    expect(config.plugins.test.type).toEqual('defaults');
+    expect(config.plugins.func.provider).toEqual(config.providers.tc);
+    expect(config.plugins.func.name).toEqual('func');
+    expect(config.plugins.defaults.function).toEqual(config.plugins.func);
   });
 
   test('local', function () {
     const config = loadConfig(process.cwd() + '/src/__tests__/', process.cwd() + '/src/__tests__/fake.func.ts').local;
 
-    expect(config.resources.function.type).toEqual('function');
-    expect(config.resources.test.type).toEqual('local');
+    expect(config.plugins.func.type).toEqual('function');
+    expect(config.plugins.func.provider).toEqual(config.providers.tc);
+    expect(config.plugins.func.name).toEqual('func');
+    expect(config.plugins.defaults.function).toEqual(config.plugins.func);
+
+    expect(config.plugins.test.type).toEqual('local');
   });
 
   test('sub local', function () {
     const config = loadConfig(process.cwd() + '/src/__tests__', process.cwd() + '/src/__tests__/sub/fake.func.ts').local;
 
-    expect(config.resources.function.type).toEqual('function');
-    expect(config.resources.test.type).toEqual('sublocal');
+    expect(config.plugins.func.type).toEqual('function');
+    expect(config.plugins.func.provider).toEqual(config.providers.tc);
+    expect(config.plugins.func.name).toEqual('func');
+    expect(config.plugins.defaults.function).toEqual(config.plugins.func);
+
+    expect(config.plugins.test.type).toEqual('sublocal');
   });
 });
