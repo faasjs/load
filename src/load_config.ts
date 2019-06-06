@@ -16,6 +16,9 @@ export class Config {
       [key: string]: any;
     };
   }
+  public readonly defaults: {
+    [key: string]: any;
+  };
   [key: string]: any;
 
   /**
@@ -58,11 +61,11 @@ export class Config {
       throw Error('[faas.yaml] need defaults env.');
     }
 
+    this.defaults = deepMerge(this.origin.defaults);
+
     for (const key in this.origin) {
       if (this.origin.hasOwnProperty(key)) {
-        if (key === 'defaults') {
-          this[key as string] = deepMerge(this.origin.defaults);
-        } else {
+        if (key !== 'defaults') {
           this[key as string] = deepMerge(this.origin.defaults, this.origin[key as string]);
         }
 
@@ -102,9 +105,10 @@ export class Config {
 
         for (const pluginKey in data.plugins.defaults) {
           if (data.plugins.defaults.hasOwnProperty(pluginKey)) {
-            const plugin = data.plugins.defaults[pluginKey as string];
+            let plugin = data.plugins.defaults[pluginKey as string];
+            // 已经被处理过的 defaults 强制还原为字符串
             if (typeof plugin !== 'string') {
-              continue;
+              plugin = plugin.name;
             }
             if (!data.plugins[plugin as string]) {
               throw Error(`[faas.yaml] Not found plugin ${plugin} <${key}/plugins/defaults/${pluginKey}>`);

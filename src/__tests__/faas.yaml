@@ -12,14 +12,18 @@ defaults:
       function: func
     func:
       provider: tc
-      type: 'function'
+      type: function
+      config:
+        env: defaults
     test:
-      type: 'defaults'
+      type: defaults
     http:
-      type: 'http'
+      type: http
     mysql:
-      type: 'mysql'
+      type: mysql
 local:
   plugins:
+    func:
+      local: local
     test:
-      type: 'local'
+      type: local

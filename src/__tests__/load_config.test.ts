@@ -19,6 +19,7 @@ describe('loadConfig', function () {
     expect(config.plugins.defaults.function).toEqual(config.plugins.func);
 
     expect(config.plugins.test.type).toEqual('local');
+    expect(config.plugins.func.config.env).toEqual('defaults');
   });
 
   test('sub local', function () {
