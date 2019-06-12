@@ -8,8 +8,6 @@ defaults:
         secretKey: secretKey
         region: ap-beijing
   plugins:
-    defaults:
-      function: func
     func:
       provider: tc
       type: function

@@ -79,14 +79,7 @@ export class Config {
           throw Error(`[faas.yaml] missing key: ${key}/plugins`);
         }
 
-        if (!data.plugins.defaults) {
-          throw Error(`[faas.yaml] missing key: ${key}/plugins/defaults`);
-        }
-
         for (const pluginKey in data.plugins) {
-          if (pluginKey === 'defaults') {
-            continue;
-          }
           if (data.plugins.hasOwnProperty(pluginKey)) {
             const plugin = data.plugins[pluginKey as string];
             plugin.name = pluginKey;
@@ -100,20 +93,6 @@ export class Config {
                 plugin.provider = deepMerge(data.providers[plugin.provider], plugin.provider);
               }
             }
-          }
-        }
-
-        for (const pluginKey in data.plugins.defaults) {
-          if (data.plugins.defaults.hasOwnProperty(pluginKey)) {
-            let plugin = data.plugins.defaults[pluginKey as string];
-            // 已经被处理过的 defaults 强制还原为字符串
-            if (typeof plugin !== 'string') {
-              plugin = plugin.name;
-            }
-            if (!data.plugins[plugin as string]) {
-              throw Error(`[faas.yaml] Not found plugin ${plugin} <${key}/plugins/defaults/${pluginKey}>`);
-            }
-            data.plugins.defaults[pluginKey as string] = data.plugins[plugin as string];
           }
         }
       }

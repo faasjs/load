@@ -7,7 +7,6 @@ describe('loadConfig', function () {
     expect(config.plugins.test.type).toEqual('defaults');
     expect(config.plugins.func.provider).toEqual(config.providers.tc);
     expect(config.plugins.func.name).toEqual('func');
-    expect(config.plugins.defaults.function).toEqual(config.plugins.func);
   });
 
   test('local', function () {
@@ -16,7 +15,6 @@ describe('loadConfig', function () {
     expect(config.plugins.func.type).toEqual('function');
     expect(config.plugins.func.provider).toEqual(config.providers.tc);
     expect(config.plugins.func.name).toEqual('func');
-    expect(config.plugins.defaults.function).toEqual(config.plugins.func);
 
     expect(config.plugins.test.type).toEqual('local');
     expect(config.plugins.func.config.env).toEqual('defaults');
@@ -28,7 +26,6 @@ describe('loadConfig', function () {
     expect(config.plugins.func.type).toEqual('function');
     expect(config.plugins.func.provider).toEqual(config.providers.tc);
     expect(config.plugins.func.name).toEqual('func');
-    expect(config.plugins.defaults.function).toEqual(config.plugins.func);
 
     expect(config.plugins.test.type).toEqual('sublocal');
   });

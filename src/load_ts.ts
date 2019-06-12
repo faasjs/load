@@ -1,8 +1,8 @@
 import deepMerge from '@faasjs/deep_merge';
 import { unlinkSync } from 'fs';
-import { execSync } from 'child_process';
 import * as rollup from 'rollup';
 import typescript from 'rollup-plugin-typescript2';
+import loadNpmVersion from './load_npm_version';
 
 /**
  * 加载 ts 文件
@@ -43,7 +43,7 @@ export default async function loadTs (filename: string, options: {
   for (const m of bundle.cache.modules || []) {
     for (const d of m.dependencies) {
       if (!d.startsWith('/') && !dependencies[d as string]) {
-        dependencies[d as string] = execSync(`yarn list ${d}`).toString().match(/@([0-9a-z.-]+)[^@]*\n/)![1];
+        dependencies[d as string] = loadNpmVersion(d);
       }
     }
   }

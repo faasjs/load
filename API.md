@@ -12,6 +12,9 @@
 <dt><a href="#loadConfig">loadConfig(root, filename)</a></dt>
 <dd><p>加载配置</p>
 </dd>
+<dt><a href="#loadNpmVersion">loadNpmVersion(name)</a></dt>
+<dd><p>获取 npm 当前安装的版本号</p>
+</dd>
 <dt><a href="#loadTs">loadTs(filename, options)</a></dt>
 <dd><p>加载 ts 文件</p>
 </dd>
@@ -45,6 +48,17 @@
 | --- | --- | --- |
 | root | <code>string</code> | 根目录 |
 | filename | <code>filename</code> | 目标文件，用于读取目录层级 |
+
+<a name="loadNpmVersion"></a>
+
+## loadNpmVersion(name)
+获取 npm 当前安装的版本号
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | npm 包的名字 |
 
 <a name="loadTs"></a>
 
