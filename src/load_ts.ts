@@ -25,7 +25,13 @@ export default async function loadTs (filename: string, options: {
   const input = deepMerge({
     input: filename,
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: {
+          compilerOptions: {
+            declaration: false
+          }
+        }
+      })
     ]
   }, options.input || {});
 
