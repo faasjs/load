@@ -8,8 +8,7 @@ export default function loadNpmVersion (name: string) {
   try {
     return execSync(`yarn list ${name}`).toString().match(/@([0-9a-z.-]+)[^@]*\n/)![1];
   } catch (error) {
-    console.error(Error(`Can't found ${name}'s version, return '*'.`));
+    console.warn(`Can't found ${name}'s version.`);
     return;
   }
-
 }
