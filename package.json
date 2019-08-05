@@ -1,6 +1,6 @@
 {
   "name": "@faasjs/load",
-  "version": "0.0.0-alpha.18",
+  "version": "0.0.0-alpha.19",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -17,7 +17,7 @@
     "lib"
   ],
   "dependencies": {
-    "@faasjs/deep_merge": "^0.0.0-alpha.2",
+    "@faasjs/deep_merge": "beta",
     "js-yaml": "*",
     "rollup": "*",
     "rollup-plugin-typescript2": "*",

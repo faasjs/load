@@ -5,5 +5,11 @@ import { execSync } from 'child_process';
  * @param name {string} npm 包的名字
  */
 export default function loadNpmVersion (name: string) {
-  return execSync(`yarn list ${name}`).toString().match(/@([0-9a-z.-]+)[^@]*\n/)![1];
+  try {
+    return execSync(`yarn list ${name}`).toString().match(/@([0-9a-z.-]+)[^@]*\n/)![1];
+  } catch (error) {
+    console.error(Error(`Can't found ${name}'s version, return '*'.`));
+    return '*';
+  }
+
 }
