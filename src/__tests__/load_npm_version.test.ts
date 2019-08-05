@@ -6,6 +6,6 @@ describe('loadNpmVersion', function () {
     const version = execSync('yarn list typescript').toString().match(/@([0-9a-z.-]+)[^@]*\n/)![1];
 
     expect(loadNpmVersion('typescript')).toEqual(version);
-    expect(loadNpmVersion('unknown')).toEqual('*');
+    expect(loadNpmVersion('unknown')).toBeUndefined();
   });
 });

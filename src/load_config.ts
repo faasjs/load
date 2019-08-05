@@ -64,35 +64,31 @@ export class Config {
     this.defaults = deepMerge(this.origin.defaults);
 
     for (const key in this.origin) {
-      if (this.origin.hasOwnProperty(key)) {
-        if (key !== 'defaults') {
-          this[key as string] = deepMerge(this.origin.defaults, this.origin[key as string]);
-        }
+      if (key !== 'defaults') {
+        this[key as string] = deepMerge(this.origin.defaults, this.origin[key as string]);
+      }
 
-        const data = this[key as string];
+      const data = this[key as string];
 
-        if (!data.providers) {
-          throw Error(`[faas.yaml] missing key: ${key}/providers`);
-        }
+      if (!data.providers) {
+        throw Error(`[faas.yaml] missing key: ${key}/providers`);
+      }
 
-        if (!data.plugins) {
-          throw Error(`[faas.yaml] missing key: ${key}/plugins`);
-        }
+      if (!data.plugins) {
+        throw Error(`[faas.yaml] missing key: ${key}/plugins`);
+      }
 
-        for (const pluginKey in data.plugins) {
-          if (data.plugins.hasOwnProperty(pluginKey)) {
-            const plugin = data.plugins[pluginKey as string];
-            plugin.name = pluginKey;
-            if (plugin.provider) {
-              if (typeof plugin.provider === 'string') {
-                if (!data.providers[plugin.provider]) {
-                  throw Error(`[faas.yaml] missing provider: ${plugin.provider} <${key}/plugins/${pluginKey}>`);
-                }
-                plugin.provider = data.providers[plugin.provider];
-              } else {
-                plugin.provider = deepMerge(data.providers[plugin.provider], plugin.provider);
-              }
+      for (const pluginKey in data.plugins) {
+        const plugin = data.plugins[pluginKey as string];
+        plugin.name = pluginKey;
+        if (plugin.provider) {
+          if (typeof plugin.provider === 'string') {
+            if (!data.providers[plugin.provider]) {
+              throw Error(`[faas.yaml] missing provider: ${plugin.provider} <${key}/plugins/${pluginKey}>`);
             }
+            plugin.provider = data.providers[plugin.provider];
+          } else {
+            plugin.provider = deepMerge(data.providers[plugin.provider], plugin.provider);
           }
         }
       }

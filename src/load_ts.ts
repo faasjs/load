@@ -25,14 +25,7 @@ export default async function loadTs (filename: string, options: {
   const input = deepMerge({
     input: filename,
     plugins: [
-      typescript({
-        tsconfigOverride: {
-          compilerOptions: {
-            declaration: false,
-            module: 'esnext'
-          }
-        }
-      }),
+      typescript(),
     ]
   }, options.input || {});
 
@@ -43,7 +36,10 @@ export default async function loadTs (filename: string, options: {
   for (const m of bundle.cache.modules || []) {
     for (const d of m.dependencies) {
       if (!d.startsWith('/') && !dependencies[d as string]) {
-        dependencies[d as string] = loadNpmVersion(d);
+        const version = loadNpmVersion(d);
+        if (version) {
+          dependencies[d as string] = version;
+        }
       }
     }
   }
