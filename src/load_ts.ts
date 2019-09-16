@@ -3,6 +3,7 @@ import { unlinkSync } from 'fs';
 import * as rollup from 'rollup';
 import typescript from 'rollup-plugin-typescript2';
 import loadNpmVersion from './load_npm_version';
+import { Func } from '@faasjs/func';
 
 /**
  * 加载 ts 文件
@@ -21,7 +22,12 @@ export default async function loadTs (filename: string, options: {
     [key: string]: any;
   };
   tmp?: boolean;
-} = Object.create(null)) {
+} = Object.create(null)): Promise<{
+    module: Func;
+    dependencies: {
+      [key: string]: string;
+    };
+  }> {
   const input = deepMerge({
     input: filename,
     plugins: [

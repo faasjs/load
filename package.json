@@ -1,6 +1,6 @@
 {
   "name": "@faasjs/load",
-  "version": "0.0.0-alpha.22",
+  "version": "0.0.0-alpha.23",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -28,6 +28,7 @@
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
     "@faasjs/eslint-config-recommended": "beta",
+    "@faasjs/func": "beta",
     "@types/debug": "*",
     "@types/jest": "*",
     "@types/js-yaml": "*",

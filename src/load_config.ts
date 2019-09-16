@@ -1,6 +1,8 @@
 import deepMerge from '@faasjs/deep_merge';
 import { existsSync, readFileSync } from 'fs';
+import { sep, dirname, join } from 'path';
 import { safeLoad } from 'js-yaml';
+import { Config as FuncConfig } from '@faasjs/func';
 
 /**
  * 配置类
@@ -9,16 +11,10 @@ export class Config {
   public readonly root: string;
   public readonly filename: string;
   public readonly origin: {
-    defaults: {
-      [key: string]: any;
-    };
-    [key: string]: {
-      [key: string]: any;
-    };
+    defaults: FuncConfig;
+    [key: string]: FuncConfig;
   }
-  public readonly defaults: {
-    [key: string]: any;
-  };
+  public readonly defaults: FuncConfig;
   [key: string]: any;
 
   /**
@@ -30,23 +26,19 @@ export class Config {
   constructor (root: string, filename: string) {
     this.root = root;
 
-    if (!this.root.endsWith('/')) {
-      this.root += '/';
+    if (!this.root.endsWith(sep)) {
+      this.root += sep;
     }
 
     this.filename = filename;
 
-    const configs: { [key: string]: any }[] = [];
+    const configs: { [key: string]: FuncConfig }[] = [];
 
-    const paths = filename.replace(root, '').replace(/\/[^/]+$/, '').split('/');
-
-    const roots = root.split('/');
-    paths.unshift(roots.pop() as string);
-    paths.unshift(roots.join('/'));
+    const paths = [this.root].concat(dirname(filename.replace(root, '')).split(sep));
 
     paths.reduce(function (base, path) {
-      const root = base + '/' + path;
-      const faas = root + '/faas.yaml';
+      const root = join(base, path);
+      const faas = join(root, 'faas.yaml');
 
       if (existsSync(faas)) {
         configs.push(safeLoad(readFileSync(faas).toString()));
@@ -55,7 +47,7 @@ export class Config {
       return root;
     });
 
-    this.origin = deepMerge.apply(null, configs);
+    this.origin = deepMerge(...configs);
 
     if (!this.origin.defaults) {
       throw Error('[faas.yaml] need defaults env.');
@@ -101,6 +93,6 @@ export class Config {
  * @param root {string} 根目录
  * @param filename {filename} 目标文件，用于读取目录层级
  */
-export default function loadConfig (root: string, filename: string) {
+export default function loadConfig (root: string, filename: string): Config {
   return new Config(root, filename);
 }
