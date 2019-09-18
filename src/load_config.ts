@@ -34,7 +34,7 @@ export class Config {
 
     const configs: { [key: string]: FuncConfig }[] = [];
 
-    const paths = [this.root].concat(dirname(filename.replace(root, '')).split(sep));
+    const paths = [this.root, '.'].concat(dirname(filename.replace(root, '')).split(sep));
 
     paths.reduce(function (base, path) {
       const root = join(base, path);
